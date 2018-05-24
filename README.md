@@ -1,5 +1,5 @@
 # MedicTent-Woodland-ACR
-Script with deployable medical tent
+Script with deployable medical tent by Ken
 
 Alpha 1.0
 
