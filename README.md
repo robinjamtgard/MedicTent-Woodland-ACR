@@ -3,16 +3,43 @@ Script with deployable medical tent by Ken
 
 Alpha 1.0
 
-# Hur kan man använda sig av skriptet?
+## Hur kan man använda sig av skriptet?
 
 1. Välj ut lämplig låda som är bärbar
 2. Ändra på lådans variabelnamn till ``tentbox``
-3. I init för denna låda lägger ni in följande text:
+3. Ladda ner ``medicalText.sqf`` till din mission mapp
+4. Lägg till följande i ``init.sqf``:
 ```
-    tentbox addAction ["<t color=""#F8FF24"">" +format["Sätt upp sjukvårdstältet."],"unpack.sqf"];
+#include "medicalTent.sqf"
+[tentbox] call ase_fnc_medicalTentInit;
 ```
 
-**Förbättring:**
+## Funktioner
+
+### ase_fnc_medicalTentInit
+
+```
+[_box] call ase_fnc_medicalTentInit;
+```
+
+Lägger till sjukvårdstältfunktionen på lådan `_box`
+
+## Variabler
+
+### ase_medicalTentObject
+
+Objektet som spawnas som camp
+
+### ase_medicalTentActionPack
+
+Definerar texten som ska visas för att packa ihop tältet
+
+### ase_medicalTentActionUnpack
+
+Definerar texten som ska visas för att packa upp tältet
+
+## Förbättring
+
 Sätt en trigger med följande kod:
 ```
     if (!alive(tentbox)) {

@@ -1020,7 +1020,6 @@ class Mission
 			flags=4;
 			class Attributes
 			{
-				init="call{this addAction [""Sätt upp sjukvårdstältet."", ""unpack.sqf""];}";
 				name="tentbox";
 				description="Sjukvårdstält";
 			};
