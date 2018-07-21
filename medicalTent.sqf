@@ -1,6 +1,6 @@
 ase_medicalTentActionPack = "<t color='#F8FF24'>Packa ner tältet</a>";
 ase_medicalTentActionUnpack = "<t color='#F8FF24'>Sätt upp sjukvårdstältet</a>";
-ase_medicalTentObject = "CampEmpty";
+ase_medicalTentDefaultObject = "CampEmpty";
 
 ase_fnc_MedicalTentAddAction = {
 	params ["_target", "_title", "_script", ["_arguments", [], []]];
@@ -27,6 +27,9 @@ ase_fnc_medicalTentUnpack = {
 	// Remove unpack action from box
 	_target removeAction _actionId;
 
+	// Get object to unpack
+	_objectClassName = _target getVariable ["ase_medicalTentObject", ase_medicalTentDefaultObject];
+
 	// Get direction of box
 	private _dir = direction _target;
 
@@ -37,7 +40,7 @@ ase_fnc_medicalTentUnpack = {
 	private _cutter = createVehicle [ "Land_ClutterCutter_Medium_F", _pos, [], 0, "NONE" ];
 
 	// Create camp
-	private _obj = ase_medicalTentObject createVehicle [0,0,0];
+	private _obj = _objectClassName createVehicle [0,0,0];
 	_obj setVariable ["ace_medical_isMedicalFacility", true];
 	_obj setDir (_dir - 180);
 	_obj attachTo [_cutter, [0,0,0.5]];
@@ -47,7 +50,9 @@ ase_fnc_medicalTentUnpack = {
 };
 
 ase_fnc_medicalTentInit = {
-	params ["_box"];
+	params ["_box", ["_objectClassName", ase_medicalTentDefaultObject, [""]]];
+
+	_box setVariable ["ase_medicalTentObject", _objectClassName];
 
 	// Create initial unpack action
 	[_box, ase_medicalTentActionUnpack, ase_fnc_medicalTentUnpack] call ase_fnc_MedicalTentAddAction;
