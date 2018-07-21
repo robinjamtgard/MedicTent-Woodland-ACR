@@ -19,10 +19,12 @@ Alpha 1.0
 ### ase_fnc_medicalTentInit
 
 ```
-[_box] call ase_fnc_medicalTentInit;
+[_box, "CampEmpty"] call ase_fnc_medicalTentInit;
 ```
 
-Lägger till sjukvårdstältfunktionen på lådan `_box`
+Lägger till sjukvårdstältfunktionen på lådan `_box`.
+Objektet av typen som skickas in som andra parametern kommer skapas bredvid lådan.
+Om inte något klassnamn skickas med så spawnas som default `CampEmpty`
 
 ## Variabler
 

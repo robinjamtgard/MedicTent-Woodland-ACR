@@ -1,2 +1,2 @@
 #include "medicalTent.sqf"
-[tentbox] call ase_fnc_medicalTentInit;
+[tentbox, "CampEmpty"] call ase_fnc_medicalTentInit;
