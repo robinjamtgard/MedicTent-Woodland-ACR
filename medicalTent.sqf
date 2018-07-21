@@ -12,7 +12,7 @@ ase_fnc_medicalTentPack = {
 	deleteVehicle _cutter;
 
 	// Re-add tent to box
-	_box addAction [ase_medicalTentActionUnpack, ase_fnc_medicalTentUnpack];
+	_box addAction [ase_medicalTentActionUnpack, ase_fnc_medicalTentUnpack,[],1,false,false,"","_this distance _target < 3"];
 };
 
 ase_fnc_medicalTentUnpack = {
@@ -37,12 +37,12 @@ ase_fnc_medicalTentUnpack = {
 	_obj attachTo [_cutter, [0,0,0.5]];
 
 	// Add pack action to camp
-	_obj addAction [ase_medicalTentActionPack, ase_fnc_medicalTentPack, [_target, _cutter]];
+	_obj addAction [ase_medicalTentActionPack, ase_fnc_medicalTentPack, [_target, _cutter],1,false,false,"","_this distance _target < 3"];
 };
 
 ase_fnc_medicalTentInit = {
 	params ["_box"];
 
 	// Create initial unpack action
-	_box addAction [ase_medicalTentActionUnpack, ase_fnc_medicalTentUnpack];
+	_box addAction [ase_medicalTentActionUnpack, ase_fnc_medicalTentUnpack,[],1,false,false,"","_this distance _target < 3"];
 };
