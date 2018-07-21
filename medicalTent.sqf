@@ -2,6 +2,12 @@ ase_medicalTentActionPack = "<t color='#F8FF24'>Packa ner tältet</a>";
 ase_medicalTentActionUnpack = "<t color='#F8FF24'>Sätt upp sjukvårdstältet</a>";
 ase_medicalTentObject = "CampEmpty";
 
+ase_fnc_MedicalTentAddAction = {
+	params ["_target", "_title", "_script", ["_arguments", [], []]];
+
+	_target addAction [_title, _script, _arguments, 1, false, true, "", "alive _target", 5];
+};
+
 ase_fnc_medicalTentPack = {
 	params ["_target", "_caller", "_actionId", "_arguments"];
 	_arguments params ["_box", "_cutter"];
@@ -12,7 +18,7 @@ ase_fnc_medicalTentPack = {
 	deleteVehicle _cutter;
 
 	// Re-add tent to box
-	_box addAction [ase_medicalTentActionUnpack, ase_fnc_medicalTentUnpack,[],1,false,false,"","_this distance _target < 3"];
+	[_box, ase_medicalTentActionUnpack, ase_fnc_medicalTentUnpack] call ase_fnc_MedicalTentAddAction;
 };
 
 ase_fnc_medicalTentUnpack = {
@@ -37,12 +43,12 @@ ase_fnc_medicalTentUnpack = {
 	_obj attachTo [_cutter, [0,0,0.5]];
 
 	// Add pack action to camp
-	_obj addAction [ase_medicalTentActionPack, ase_fnc_medicalTentPack, [_target, _cutter],1,false,false,"","_this distance _target < 3"];
+	[_obj, ase_medicalTentActionPack, ase_fnc_medicalTentPack, [_target, _cutter]] call ase_fnc_MedicalTentAddAction;
 };
 
 ase_fnc_medicalTentInit = {
 	params ["_box"];
 
 	// Create initial unpack action
-	_box addAction [ase_medicalTentActionUnpack, ase_fnc_medicalTentUnpack,[],1,false,false,"","_this distance _target < 3"];
+	[_box, ase_medicalTentActionUnpack, ase_fnc_medicalTentUnpack] call ase_fnc_MedicalTentAddAction;
 };
